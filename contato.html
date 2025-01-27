@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="contato.css">
+    <title>Entrar em Contato</title>
+</head>
+<body>
+    <form class="form" id="contact-form">
+        <div class="title">Entre em contato</div>
+        <input type="text" name="user_email" placeholder="Seu email" class="input" required>
+        <textarea name="message" placeholder="Deixe sua mensagem" required></textarea>
+        <button type="submit">Enviar</button>
+    </form>
+
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+        (function(){
+            emailjs.init("PWNMIv1VJVDcP09fW"); 
+        })();
+
+        document.getElementById("contact-form").addEventListener("submit", function(event) {
+    event.preventDefault(); // Evita recarregar a página
+
+    emailjs.sendForm("service_tkhlomd", "template_szhnr2a", this)
+        .then(function(response) {
+            alert("Mensagem enviada com sucesso!");
+            document.getElementById("contact-form").reset(); // Limpa o formulário
+        }, function(error) {
+            console.error("Erro ao enviar mensagem:", error); // Exibe o erro completo no console
+            alert("Erro ao enviar mensagem. Veja o console para detalhes.");
+        });
+});
+
+    </script>
+</body>
+</html>
